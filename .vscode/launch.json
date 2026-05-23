@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) 外部终端运行",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+//           "console": "externalTerminal",
+            "preLaunchTask": "g++ build active file",
+            "MIMode": "gdb",
+            "miDebuggerPath": "E:\\mingw64\\bin\\gdb.exe"
+        }
+    ]
+}
