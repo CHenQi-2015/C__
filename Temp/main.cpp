@@ -7,7 +7,9 @@ signed main(){
     cin>>n;
     for (int i=1;i<=n;i++)
     {
-
+        int m;
+        cin>>m;
+        
     }
     return 0;
 }
