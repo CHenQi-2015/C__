@@ -30,5 +30,6 @@ signed main(){
             cnt++;
         }
     }
+    cout<<cnt;
     return 0;
 }
