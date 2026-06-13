@@ -4,7 +4,11 @@
 using namespace std;
 const int N=3e5;
 int n;
-pii tag[N];
+struct Node
+{
+    int x;
+    int y;
+}tag[N];
 signed main(){
     
     return 0;
