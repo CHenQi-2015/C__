@@ -21,5 +21,7 @@ signed main(){
         cin>>p[i].x>>p[i].y;
     }
     sort(p+1,p+1+n,cmp);
+    int cnt=0,ans=LLONG_MAX;
+    
     return 0;
 }
