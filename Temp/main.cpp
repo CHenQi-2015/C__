@@ -24,7 +24,11 @@ signed main(){
     int cnt=0,ans=LLONG_MAX;
     for (int i=1;i<=n;i++)
     {
-        
+        if (p[i].y<t)
+        {
+            t=p[i].y;
+            cnt++;
+        }
     }
     return 0;
 }
