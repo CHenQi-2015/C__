@@ -18,7 +18,7 @@ signed main(){
     cin>>n;
     for (int i=1;i<=n;i++)
     {
-        
+        cin>>p[i].x>>p[i].y;
     }
     return 0;
 }
