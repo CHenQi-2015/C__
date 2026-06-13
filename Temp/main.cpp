@@ -22,6 +22,9 @@ signed main(){
     }
     sort(p+1,p+1+n,cmp);
     int cnt=0,ans=LLONG_MAX;
-    
+    for (int i=1;i<=n;i++)
+    {
+        
+    }
     return 0;
 }
