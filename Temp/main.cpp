@@ -10,6 +10,10 @@ struct Node
     int y;
 }tag[N];
 signed main(){
-    
+    cin>>n;
+    for (int i=1;i<=n;i++)
+    {
+        
+    }
     return 0;
 }
