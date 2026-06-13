@@ -20,5 +20,6 @@ signed main(){
     {
         cin>>p[i].x>>p[i].y;
     }
+    sort(p+1,p+1+n,cmp);
     return 0;
 }
