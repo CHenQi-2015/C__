@@ -23,4 +23,12 @@ add_executable(C__
         模板工具/线段树封装.cpp
         模板工具/莫队算法模板P2709.cpp
         模板工具/连通块.cpp
-        Temp/niam.cpp)
+        Temp/niam.cpp
+        Program/trie.cpp
+        test/random.cpp
+        test/sol.cpp
+        test/bf.cpp
+        test/test.cpp
+        Program/鼠标连点器.cpp
+        contest/t3.cpp
+        contest/t4.cpp)

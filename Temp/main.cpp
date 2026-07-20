@@ -1,35 +1,42 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 #define int long long
-#define pii pair<int,int>
 using namespace std;
-const int N=3e5;
-int n;
-struct Node
+const int N=500005;
+int tot,h[N];
+struct node
 {
-    int x;
-    int y;
-}p[N];
-bool cmp(Node a,Node b)
+    int u,v,nxt;
+}e[N];
+void add(int u,int v)
 {
-    if (a.x!=b.x)return a.x<b.x;
-    return a.y<b.y;
+    e[++tot]={u,v,h[u]};
+    h[u]=tot;
 }
-signed main(){
-    cin>>n;
-    for (int i=1;i<=n;i++)
+int n,dep[N];
+bool vs[N];
+void dfs(int r,int f)
+{
+    dep[r]=f+1;
+    vs[r]=1;
+    for (int i=h[r];i;i=e[i].nxt)
     {
-        cin>>p[i].x>>p[i].y;
-    }
-    sort(p+1,p+1+n,cmp);
-    int cnt=0,t=LLONG_MAX;
-    for (int i=1;i<=n;i++)
-    {
-        if (p[i].y<t)
+        int v=e[i].v;
+        if (!vs[v])
         {
-            t=p[i].y;
-            cnt++;
+
         }
     }
-    cout<<cnt;
+}
+signed main()
+{
+    cin>>n;
+    int u,v;
+    for (int i=1;i<=n;i++)
+    {
+        cin>>u>>v;
+        add(u,v);
+        add(v,u);
+    }
+    dfs(1,0);
     return 0;
 }

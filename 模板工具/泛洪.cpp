@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-using namespace std;
 const int ROWS,COLS;
 int image[ROWS][COLS];
 void print(){
@@ -11,7 +10,7 @@ void print(){
 	}	
 	return;
 }
-void floodfill(int x,int y,int oldcolor,int newcolor){
+void floodfill(int x,int y,int oldcolor,int newcolor){§n
 	if(image[x][y]!=oldcolor)return;
 	image[x][y]=0;
 	if(x>0)floodfill(x-1,y,oldcolor,newcolor);

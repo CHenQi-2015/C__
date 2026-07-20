@@ -1,5 +1,5 @@
 #define mid (l+r>>1)
-struct xds {
+struct arr_tree{
 	int n,a[N];
 	struct stu {
 		int l,r,add,num;
