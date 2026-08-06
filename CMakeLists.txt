@@ -31,4 +31,11 @@ add_executable(C__
         test/test.cpp
         Program/鼠标连点器.cpp
         contest/t3.cpp
-        contest/t4.cpp)
+        contest/t4.cpp
+        contest/t1.cpp
+        contest/t2.cpp
+        模板工具/DP/背包/完全背包.cpp
+        模板工具/DP/背包/完全背包.cpp
+        模板工具/DP/背包/01背包.cpp
+        head/segments_tree.h
+        head/knapsack.h)

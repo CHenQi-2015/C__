@@ -1,74 +1,37 @@
+
 #include <bits/stdc++.h>
 using namespace std;
-
-int main(){
-    int n, m;
-    scanf("%d %d", &n, &m);
-    vector<int> X(m+1);
-    vector<long long> cnt(n+2, 0);
-    for(int i=1;i<=m;i++){
-        scanf("%d", &X[i]);
-        cnt[X[i]]++;
+int main() {
+    int N, M;
+    cin >> N >> M;
+    vector<vector<int>> adj(N-100);
+    vector<int> indeg(N + 1, 0);
+    for (int i = 0; i < M; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        indeg[v]++;
     }
 
-    vector<long long> PA(n+2,0), PB(n+2,0), PC(n+2,0), PD(n+2,0);
-    vector<long long> SufCD(n+2,0), PrefAB(n+2,0);
+    const int NEG = -1e9;
+    vector<int> dp(N + 1, NEG);
+    dp[1] = 1;
+    queue<int> q;
+    for (int i = 1; i <= N; i++)
+        if (indeg[i] == 0) q.push(i);
 
-    for(int p=2; p<=n-1; p+=2){
-        int k = p/2;
-
-        SufCD[n] = 0;
-        for(int x=n-1; x>=0; x--){
-            long long term = 0;
-            int v = x+1;
-            if(v <= n-k) term = cnt[v]*cnt[v+k];
-            SufCD[x] = SufCD[x+1] + term;
-        }
-
-        PrefAB[0] = 0;
-        for(int x=1; x<=n; x++){
-            long long term = 0;
-            if(x > p) term = cnt[x-p]*cnt[x];
-            PrefAB[x] = PrefAB[x-1] + term;
-        }
-
-        for(int vb=p+1; vb<=n; vb++){
-            if(cnt[vb]==0) continue;
-            long long x = vb + 3LL*p;
-            int xi = (x>n) ? n : (int)x;
-            PB[vb] += cnt[vb-p]*SufCD[xi];
-        }
-
-        for(int va=1; va<=n-p; va++){
-            if(cnt[va]==0) continue;
-            long long x = va + 4LL*p;
-            int xi = (x>n) ? n : (int)x;
-            PA[va] += cnt[va+p]*SufCD[xi];
-        }
-
-        for(int vc=1; vc<=n-k; vc++){
-            if(cnt[vc]==0) continue;
-            long long x = (long long)vc - 3LL*p - 1;
-            int xi = (x<0) ? 0 : ((x>n) ? n : (int)x);
-            PC[vc] += cnt[vc+k]*PrefAB[xi];
-        }
-
-        for(int vd=k+1; vd<=n; vd++){
-            if(cnt[vd]==0) continue;
-            long long x = (long long)vd - k - 3LL*p - 1;
-            int xi = (x<0) ? 0 : ((x>n) ? n : (int)x);
-            PD[vd] += cnt[vd-k]*PrefAB[xi];
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        if (dp[u] == NEG) continue;
+        for (int v : adj[u]) {
+            dp[v] = max(dp[v], dp[u] + 1);
+            if (--indeg[v] == 0) q.push(v);
         }
     }
 
-    string out;
-    out.reserve((size_t)m*24);
-    char buf[64];
-    for(int i=1;i<=m;i++){
-        int v = X[i];
-        int len = sprintf(buf, "%lld %lld %lld %lld\n", PA[v], PB[v], PC[v], PD[v]);
-        out.append(buf, len);
+    for (int i = 1; i <= N; i++) {
+        if (dp[i] == NEG) cout << 0 << "\n";
+        else cout << dp[i] << "\n";
     }
-    fwrite(out.data(), 1, out.size(), stdout);
     return 0;
 }
