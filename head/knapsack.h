@@ -1,20 +1,39 @@
-#ifndef knap
-#define knap
+#ifndef KNAPSACK_H
+#define KNAPSACK_H
 #include<vector>
-int knapsack_comp(long long sw,long long n,long long *w[],long long *v[])
+using ll=long long;
+inline ll knapsack_comp(ll sw,ll n,const ll w[],const ll v[])
 {
-    std::vector<long long>dp(n);
-    for (long long i=1;i<=n;i++)
-        for (long long j=*w[i];j<=sw;j++)
-            if (dp[j-*w[i]]+v[i]>v[i])dp[j]=dp[j-*w[i]]+*v[i];
+    //完全背包
+    std::vector<ll>dp(sw+5,0);
+    for (ll i=1;i<=n;i++)
+    {
+        for (ll j=w[i];j<=sw;j++)
+        {
+            //正序遍历
+            if (dp[j-w[i]]+v[i]>dp[j])
+            {
+                dp[j]=dp[j-w[i]]+v[i];
+            }
+        }
+    }
     return dp[sw];
 }
-int knapsack_01(long long sw,long long n,long long *w[],long long *v[])
+inline ll knapsack_01(ll sw,ll n,const ll w[],const ll v[])
 {
-    std::vector<long long>dp(n);
-    for (long long i=1;i<=n;i++)
-        for (long long j=sw;j>=*w[i];j--)
-            if (dp[j-*w[i]]+v[i]>v[i])dp[j]=dp[j-*w[i]]+*v[i];
+    //01背包
+    std::vector<ll>dp(sw+5,0);
+    for (ll i=1;i<=n;i++)
+    {
+        for (ll j=sw;j>=w[i];j--)
+        {
+            //逆序遍历
+            if (dp[j-w[i]]+v[i]>dp[j])
+            {
+                dp[j]=dp[j-w[i]]+v[i];
+            }
+        }
+    }
     return dp[sw];
 }
 #endif

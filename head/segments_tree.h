@@ -12,7 +12,7 @@ class SMT
 //typedef long long ll;
 using ll=long long;//=#define ll long long 或 typedef long long ll;
 public:
-    SMT(ll m,const std::vector<ll>&arr):n(m),a(m+5),tr((m<<2)+5),tag((m<<2)+5)
+    SMT(ll m,const std::vector<ll>&arr):n(m),a(m+5,0),tr((m<<2)+5,0),tag((m<<2)+5,0)
     {
         for (ll i=1;i<=m;i++)
         {
