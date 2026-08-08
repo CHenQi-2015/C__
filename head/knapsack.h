@@ -13,7 +13,7 @@ inline ll knapsack_comp(ll sw,ll n,const ll w[],const ll v[])
             //正序遍历
             if (dp[j-w[i]]+v[i]>dp[j])
             {
-                dp[j]=dp[j-w[i]]+v[i];
+                dp[j]=dp[j-w[i]]+v[i];//1-index编码
             }
         }
     }
@@ -30,7 +30,7 @@ inline ll knapsack_01(ll sw,ll n,const ll w[],const ll v[])
             //逆序遍历
             if (dp[j-w[i]]+v[i]>dp[j])
             {
-                dp[j]=dp[j-w[i]]+v[i];
+                dp[j]=dp[j-w[i]]+v[i];//1-index编码
             }
         }
     }

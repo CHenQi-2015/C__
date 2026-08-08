@@ -12,22 +12,34 @@ class SMT
 //typedef long long ll;
 using ll=long long;//=#define ll long long 或 typedef long long ll;
 public:
-    SMT(ll m,const std::vector<ll>&arr):n(m),a(m+5,0),tr((m<<2)+5,0),tag((m<<2)+5,0)
+    ll n;
+    std::vector<ll>a;
+    SMT(ll m,const std::vector<ll> arr={}):n(m),a(m+5,0),tr((m<<2)+5,0),tag((m<<2)+5,0)
     {
-        for (ll i=1;i<=m;i++)
+        if (!arr.empty())
         {
-            a[i]=arr[i];//1-index编码
+            for (ll i=1;i<=m;i++)
+            {
+                a[i]=arr[i];
+            }
         }
+
+        build(1,1,n);
         return;
     }
-    void build(){build(1,1,n);}
+    void rebuild()
+    {
+        if (n<=0)return;
+        resize();
+        build(1,1,n);
+    }
     void update(ll qlt,ll qrt,ll v){update(1,1,n,qlt,qrt,v);}
     ll query(ll qlt,ll qrt){return query(1,1,n,qlt,qrt);}
     void point_update(ll qpt,ll v){update(1,1,n,qpt,qpt,v);}
     ll point_query(ll qpt){return query(1,1,n,qpt,qpt);}
+    void remove(){clean();}
 private:
-    ll n;
-    std::vector<ll>a,tr,tag;
+    std::vector<ll>tr,tag;
     static constexpr ll ls(ll r)
     {
         return r<<1;
@@ -89,6 +101,17 @@ private:
         push_down(r,lt,rt);
         ll mid=((lt+rt)>>1);
         return query(ls(r),lt,mid,qlt,qrt)/*左半部分*/+query(rs(r),mid+1,rt,qlt,qrt)/*右半部分*/;
+    }
+    void clean(){
+        n=0;
+        a.clear();
+        tr.clear();
+        tag.clear();
+    }
+    void resize()
+    {
+        tr.resize((n<<2)+5);
+        tag.resize((n<<2)+5);
     }
 //#undef ll
 };
