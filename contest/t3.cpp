@@ -1,37 +1,63 @@
-
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
-    int N, M;
-    cin >> N >> M;
-    vector<vector<int>> adj(N-100);
-    vector<int> indeg(N + 1, 0);
-    for (int i = 0; i < M; i++) {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        indeg[v]++;
-    }
-
-    const int NEG = -1e9;
-    vector<int> dp(N + 1, NEG);
-    dp[1] = 1;
-    queue<int> q;
-    for (int i = 1; i <= N; i++)
-        if (indeg[i] == 0) q.push(i);
-
-    while (!q.empty()) {
-        int u = q.front(); q.pop();
-        if (dp[u] == NEG) continue;
-        for (int v : adj[u]) {
-            dp[v] = max(dp[v], dp[u] + 1);
-            if (--indeg[v] == 0) q.push(v);
+typedef long long ll;
+const int N=1e5+5;
+ll n,m,a[N];
+bool check(ll mid){
+    int d=1;
+    ll now=0;
+    bool free=0;
+    for (int i=1;i<=n;i++)
+    {
+        ll t=a[i];
+        if (now+t<=mid){
+            now+=t;
+        }
+        else
+        {
+           if (!free)free=1;
+           else
+           {
+               d++;
+               if (d>m)return 0;
+               now=t;
+               free=0;
+               if (now>mid)
+               {
+                   if (!free)
+                   {
+                       free=1;
+                       now=0;
+                   }
+               }
+           }
         }
     }
-
-    for (int i = 1; i <= N; i++) {
-        if (dp[i] == NEG) cout << 0 << "\n";
-        else cout << dp[i] << "\n";
+    return true;
+}
+int main()
+{
+    ios::sync_with_stdio(false),cin.tie(nullptr);
+//    freopen("t3.in","r",stdin);
+//    freopen("t3.out","w",stdout);
+    cin>>n>>m;
+    ll sum=0;
+    for (int i=1;i<=n;i++)
+    {
+        cin>>a[i];
+        sum+=a[i];
     }
+    ll lt=0,rt=sum,ans=sum;
+    while (lt<=rt)
+    {
+        ll mid=lt+((rt-lt)>>1);
+        if (check(mid))
+        {
+            ans=mid;
+            rt=mid;
+        }
+        else lt=mid;
+    }
+    cout<<ans;
     return 0;
 }

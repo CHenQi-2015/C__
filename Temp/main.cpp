@@ -1,20 +1,18 @@
-#include<bits/stdc++.h>
-#define int long long
+#include <bits/stdc++.h>
 using namespace std;
-const int N=10005,W=1e7+5;
-int w[N],v[N],a[N],dp[W];
-signed main()
+typedef long long ll;
+int main()
 {
     ios::sync_with_stdio(false),cin.tie(nullptr);
-    int sw,n;
-    cin>>sw>>n;
-    for (int i=1;i<=n;i++)
+    string s;
+    ll n;
+    cin>>s>>n;
+    ll l=s.size();
+    while (l<=n)
     {
-        cin>>w[i]>>v[i];
+        s=s+s[l-1]+s.substr(0,l-1);
+        l<<=1;
     }
-    for (int i=1;i<=n;i++)
-        for (int j=w[i];j<=sw;j++)
-            dp[j]=max(dp[j-w[i]]+v[i],dp[j]);
-    cout<<dp[sw];
+    cout<<s[n-1];
     return 0;
 }
