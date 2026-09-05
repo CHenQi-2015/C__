@@ -1,23 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef  long long ll;
+typedef  unsigned long long ull;
 int main()
 {
     ios::sync_with_stdio(false),cin.tie(nullptr);
 //    freopen("t1.in","r",stdin);
 //    freopen("t1.out","w",stdout);
-    string s;
-    cin>>s;
-    int cnt[26]={};
-    for (char c:s)
-    {
-        cnt[c-'a']++;
-    }
-    int ans=0;
-    for (int i=0;i<26;i++)
-    {
-        ans=max(ans,cnt[i]);
-    }
-    cout<<ans;
+    ull n;
+    cin>>n;
+    ull t=n/6;
+    int a[6]={0,0,1,2,2,3};
+    cout<<(t<<2)+a[n-(t<<2)-(t<<1)];
     return 0;
 }

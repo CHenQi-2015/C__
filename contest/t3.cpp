@@ -1,63 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-const int N=1e5+5;
-ll n,m,a[N];
-bool check(ll mid){
-    int d=1;
-    ll now=0;
-    bool free=0;
-    for (int i=1;i<=n;i++)
-    {
-        ll t=a[i];
-        if (now+t<=mid){
-            now+=t;
-        }
-        else
-        {
-           if (!free)free=1;
-           else
-           {
-               d++;
-               if (d>m)return 0;
-               now=t;
-               free=0;
-               if (now>mid)
-               {
-                   if (!free)
-                   {
-                       free=1;
-                       now=0;
-                   }
-               }
-           }
-        }
-    }
-    return true;
-}
+const int N=2e5+5;
+int n,a[N],b[N];
 int main()
 {
     ios::sync_with_stdio(false),cin.tie(nullptr);
 //    freopen("t3.in","r",stdin);
 //    freopen("t3.out","w",stdout);
-    cin>>n>>m;
-    ll sum=0;
+    cin>>n;
     for (int i=1;i<=n;i++)
     {
-        cin>>a[i];
-        sum+=a[i];
+        cin>>a[i]>>b[i];
     }
-    ll lt=0,rt=sum,ans=sum;
-    while (lt<=rt)
+    ll s=0;
+    for (int i=1;i<n;i++)
     {
-        ll mid=lt+((rt-lt)>>1);
-        if (check(mid))
-        {
-            ans=mid;
-            rt=mid;
-        }
-        else lt=mid;
+        if (a[i]==a[i+1])s+=min(b[i],b[i+1]);
     }
-    cout<<ans;
+    cout<<s;
     return 0;
 }
